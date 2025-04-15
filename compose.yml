@@ -1,0 +1,35 @@
+services:
+  proxy:
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      server0:
+        condition: service_started
+      server1:
+        condition: service_started
+
+  server0:
+    image: "nginx"
+    labels:
+      gsrp.subdomain: web0
+    ports:
+      - "8081:80"
+
+  server1:
+    image: "nginx"
+    labels:
+      gsrp.subdomain: web1
+    ports:
+      - "8082:80"
+
+  server2:
+    image: "guionardo/http_helloworld:latest"
+    labels:
+      gsrp.subdomain: web2
+    ports:
+      - "8083:8080"
+
+
