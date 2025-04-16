@@ -81,9 +81,15 @@ export const useContainerStore = defineStore('container', {
     columns: () => columns,
     rows: (state) =>
       state.containers.map(function (c) {
+        let url
+        if (c.Subdomain) {
+          url = `${location.protocol}//${c.Subdomain}.${location.host}`
+        } else {
+          url = `${location.protocol}//${location.host}`
+        }
         return {
           Name: c.Name,
-          URL: `//${c.Subdomain}.${location.host}`,
+          URL: url,
           Image: c.Image,
           Active: c.Active,
           CPUUsage: c.Stats.CPUUsage,

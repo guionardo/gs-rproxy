@@ -3,7 +3,7 @@
     <q-table title="Containers" :rows="rows" :columns="columns" row-key="name">
       <template v-slot:body-cell-url="props">
         <q-td :props="props">
-          <a href="{{ props.row.URL }}">{{ props.row.URL }}</a>
+          <a :href="props.row.URL">{{ props.row.URL }}</a>
         </q-td>
       </template>
     </q-table>
